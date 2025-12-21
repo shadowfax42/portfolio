@@ -1,0 +1,28 @@
+{
+  "name": "siham-elmali-portfolio",
+  "version": "1.0.0",
+  "description": "Personal website for Siham Elmali - Data Scientist & Engineer",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "echo 'Deploy using GitHub Actions'"
+  },
+  "keywords": [
+    "portfolio",
+    "data-science",
+    "machine-learning",
+    "personal-website",
+    "responsive"
+  ],
+  "author": "Siham Elmali",
+  "license": "MIT",
+  "homepage": "https://shadowfax42.github.io/portfolio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shadowfax42/portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shadowfax42/portfolio/issues"
+  }
+}
