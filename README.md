@@ -40,26 +40,3 @@ A modern, professional personal website showcasing data science and engineering 
         └── deploy.yml  
 ```
 
-## 🚀 Deploying to GitHub Pages
-
-1. **Create a new repository** on GitHub (e.g., `portfolio`)
-
-2. **Upload all files** to your repository:
-
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit - Personal website"
-   git branch -M main
-   git remote add origin https://github.com/shadowfax42/portfolio.git
-   git push -u origin main
-   ```
-
-3. **Enable GitHub Pages**:
-   - Go to your repository settings
-   - Navigate to "Pages" section
-   - Select source as "GitHub Actions"
-
-4. **The workflow will automatically deploy** your website to `https://shadowfax42.github.io/portfolio/`
-
-
