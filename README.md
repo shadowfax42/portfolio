@@ -111,13 +111,3 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🤝 Contributing
 
 This is a personal website, but suggestions and improvements are welcome!
-
-## 📞 Contact
-
-- Email: siham.elmali@gmail.com
-- GitHub: @shadowfax42
-- LinkedIn: /in/siham-elmali
-
----
-
-**Built with ❤️ by Siham Elmali**
