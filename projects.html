@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Siham Elmali</title>
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -29,7 +26,8 @@
                         'navy': '#1a1f36',
                         'copper': '#c17817',
                         'sage': '#7c9885',
-                        'charcoal': '#2d3748'
+                        'charcoal': '#2d3748',
+                        'off-white': '#fcfcfc'
                     }
                 }
             }
@@ -37,6 +35,22 @@
     </script>
     
     <style>
+        /* Custom Styles & Overrides */
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(26, 31, 54, 0.95), rgba(124, 152, 133, 0.85));
+            position: relative;
+        }
+
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
         .project-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -46,13 +60,15 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         
+        /* Active state for filter buttons */
         .filter-btn {
             transition: all 0.3s ease;
         }
         
         .filter-btn.active {
             background: linear-gradient(135deg, #c17817, #7c9885);
-            color: white;
+            color: white !important;
+            border-color: transparent !important;
             transform: translateY(-2px);
             box-shadow: 0 10px 25px -5px rgba(193, 120, 23, 0.4);
         }
@@ -62,29 +78,38 @@
             background: rgba(250, 250, 250, 0.9);
         }
         
-        .modal {
-            backdrop-filter: blur(10px);
-        }
-        
-        .modal-content {
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
         .scroll-reveal {
             opacity: 0;
             transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .scroll-reveal.revealed {
             opacity: 1;
             transform: translateY(0);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .footer-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #c17817;
+            transition: width 0.3s ease;
+        }
+        .footer-link:hover::after {
+            width: 100%;
         }
     </style>
 </head>
 <body class="font-body bg-gray-50 text-charcoal">
-    <!-- Navigation -->
+    
     <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -96,7 +121,7 @@
                         <a href="index.html" class="text-charcoal hover:text-copper transition-colors duration-200">Home</a>
                         <a href="projects.html" class="text-copper font-medium border-b-2 border-copper pb-1">Projects</a>
                         <a href="about.html" class="text-charcoal hover:text-copper transition-colors duration-200">About</a>
-                                                <a href="resources/Siham_Elmali_Nov2025.pdf" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-copper transition-colors duration-200 flex items-center gap-1">
+                        <a href="resources/Siham_Elmali_Nov2025.pdf" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-copper transition-colors duration-200 flex items-center gap-1">
                             Resume
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -113,34 +138,31 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Mobile menu -->
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="index.html" class="block px-3 py-2 text-charcoal hover:text-copper">Home</a>
                 <a href="projects.html" class="block px-3 py-2 text-copper font-medium">Projects</a>
                 <a href="about.html" class="block px-3 py-2 text-charcoal hover:text-copper">About</a>
-                                        <a href="resources/Siham_Elmali_Nov2025.pdf" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-copper transition-colors duration-200 flex items-center gap-1">
-                            Resume
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
+                <a href="resources/Siham_Elmali_Nov2025.pdf" target="_blank" rel="noopener noreferrer" class="text-charcoal hover:text-copper transition-colors duration-200 flex items-center gap-1">
+                    Resume
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="pt-24 pb-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-5xl md:text-6xl font-display font-bold text-navy mb-6">My Projects</h1>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+    <section class="hero-bg pt-24 pb-16 relative overflow-hidden">
+        <div id="particle-container" class="particle-bg"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-5xl md:text-6xl font-display font-bold text-white mb-6">My Projects</h1>
+            <p class="text-xl text-gray-200 max-w-3xl mx-auto">
                 A collection of data-driven solutions, from full-stack energy management platforms to audio signal processing systems and community-driven initiatives.
             </p>
         </div>
     </section>
 
-    <!-- Project Filters -->
     <section class="py-8 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-4">
@@ -163,40 +185,32 @@
         </div>
     </section>
 
-    <!-- Projects Grid -->
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Energy Hub Project -->
                 <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" 
-                     data-categories="fullstack,datascience" id="energy-hub">
+                     data-categories="fullstack,datascience">
                     <div class="relative">
-                        <img src="resources/energy-hub.jpg" alt="Energy Hub Dashboard" class="w-full h-48 object-cover">
+                        <img src="resources/energy-hub.jpg" alt="Energy Hub Dashboard" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80'">
                         <div class="absolute top-4 right-4 flex gap-2">
                             <span class="bg-copper text-white px-3 py-1 rounded-full text-sm font-medium">Full-Stack</span>
-                            <span class="bg-sage text-white px-3 py-1 rounded-full text-sm font-medium">ML</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-display font-semibold text-navy mb-3">Energy Hub</h3>
                         <p class="text-gray-600 mb-4">
-                            Comprehensive energy management platform combining interactive dashboards with deep learning transformers for weather normalization and 168-hour forecasting across non-residential buildings.
+                            Comprehensive energy management platform combining interactive dashboards with deep learning transformers architecture for weather normalization and forecasting.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Dash</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Plotly</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Azure</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Docker</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Transformers</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <a href="https://github.com/gatechdvateam/energy_hub" target="_blank" class="text-copper hover:text-navy font-medium transition-colors duration-200">
-                                View Project →
-                            </a>
-                            <a href="https://github.com/gatechdvateam/energy_hub" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex justify-end items-center mt-4">
+                            <a href="https://github.com/gatechdvateam/energy_hub" target="_blank" class="p-2 bg-gray-100 hover:bg-copper rounded-full transition-all duration-200 group" title="View Code on GitHub">
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -204,34 +218,27 @@
                     </div>
                 </div>
 
-                <!-- LPC Encoder/Decoder Project -->
                 <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" 
-                     data-categories="signal-processing,datascience" id="lpc-codec">
+                     data-categories="signal-processing,datascience">
                     <div class="relative">
-                        <img src="resources/lpc-project.jpg" alt="LPC Audio Processing" class="w-full h-48 object-cover">
+                        <img src="resources/lpc-project.jpg" alt="LPC Audio Processing" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80'">
                         <div class="absolute top-4 right-4 flex gap-2">
                             <span class="bg-copper text-white px-3 py-1 rounded-full text-sm font-medium">Signal Processing</span>
-                            <span class="bg-sage text-white px-3 py-1 rounded-full text-sm font-medium">MATLAB</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-display font-semibold text-navy mb-3">LPC Speech Codec</h3>
                         <p class="text-gray-600 mb-4">
-                            Speech codec implementation using Linear Predictive Coding for audio compression and synthesis. Features LPC analysis, pitch detection with Modified Autocorrelation, and speech reconstruction using glottal pulse models.
+                            Speech codec implementation using Linear Predictive Coding for audio compression and synthesis. Features LPC analysis, pitch detection, and speech reconstruction.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">MATLAB</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Audio Processing</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Digital Signal</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">LPC</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Speech Synthesis</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <a href="https://github.com/shadowfax42/lpc-encoder-decoder" target="_blank" class="text-copper hover:text-navy font-medium transition-colors duration-200">
-                                View Project →
-                            </a>
-                            <a href="https://github.com/shadowfax42/lpc-encoder-decoder" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex justify-end items-center mt-4">
+                            <a href="https://github.com/shadowfax42/lpc-encoder-decoder" target="_blank" class="p-2 bg-gray-100 hover:bg-copper rounded-full transition-all duration-200 group" title="View Code on GitHub">
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -239,33 +246,27 @@
                     </div>
                 </div>
 
-                <!-- Python Summer Party -->
                 <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" 
-                     data-categories="community,fullstack" id="python-party">
+                     data-categories="community,fullstack">
                     <div class="relative">
-                        <img src="resources/python-party.jpg" alt="Python Community Event" class="w-full h-48 object-cover">
+                        <img src="resources/python-party.jpg" alt="Python Community Event" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80'">
                         <div class="absolute top-4 right-4 flex gap-2">
                             <span class="bg-copper text-white px-3 py-1 rounded-full text-sm font-medium">Community</span>
-                            <span class="bg-sage text-white px-3 py-1 rounded-full text-sm font-medium">Education</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-display font-semibold text-navy mb-3">Python Summer Party 2025</h3>
                         <p class="text-gray-600 mb-4">
-                            Community-driven Python learning event featuring hands-on workshops, networking sessions, and collaborative coding activities. Designed to foster professional development and knowledge sharing.
+                            An intensive 15-day coding challenge designed to sharpen Python skills through consistent practice.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Education</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Community</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Workshops</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <a href="https://github.com/shadowfax42/python-summer-party-2025" target="_blank" class="text-copper hover:text-navy font-medium transition-colors duration-200">
-                                View Project →
-                            </a>
-                            <a href="https://github.com/shadowfax42/python-summer-party-2025" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex justify-end items-center mt-4">
+                            <a href="https://github.com/shadowfax42/python-summer-party-2025" target="_blank" class="p-2 bg-gray-100 hover:bg-copper rounded-full transition-all duration-200 group" title="View Code on GitHub">
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -273,32 +274,27 @@
                     </div>
                 </div>
 
-                <!-- SolarCoders MIT Hackathon -->
                 <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" 
-                     data-categories="datascience,community" id="solar-coders">
+                     data-categories="datascience,community">
                     <div class="relative">
-                        <img src="resources/solar-coders.jpg" alt="MIT Policy Hackathon" class="w-full h-48 object-cover">
+                        <img src="resources/solar-coders.jpg" alt="MIT Policy Hackathon" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1509391366360-fe5bb58583bb?auto=format&fit=crop&q=80'">
                         <div class="absolute top-4 right-4 flex gap-2">
                             <span class="bg-copper text-white px-3 py-1 rounded-full text-sm font-medium">Hackathon</span>
-                            <span class="bg-sage text-white px-3 py-1 rounded-full text-sm font-medium">Policy</span>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-display font-semibold text-navy mb-3">SolarCoders MIT Policy Hackathon</h3>
+                        <h3 class="text-xl font-display font-semibold text-navy mb-3">MIT 8th Annual Policy Hackathon 2025</h3>
                         <p class="text-gray-600 mb-4">
-                            Team submission for the MIT Policy Hackathon 2025, co-developing a Fair Energy Pricing Framework using financial and peak-demand analysis with equity metrics (CDC Social Vulnerability Index) to improve residential DER adoption and grid reliability.                        <div class="flex flex-wrap gap-2 mb-4">
+                            SolarCoders submission for the MIT 2025 Policy Hackathon developing innovative policy solutions for renewable energy adoption.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Jupyter</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Policy Analysis</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Data Viz</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Renewable Energy</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <a href="https://github.com/shadowfax42/SolarCoders-MITPolicyHackathon25" target="_blank" class="text-copper hover:text-navy font-medium transition-colors duration-200">
-                                View Project →
-                            </a>
-                            <a href="https://github.com/shadowfax42/SolarCoders-MITPolicyHackathon25" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex justify-end items-center mt-4">
+                            <a href="https://github.com/shadowfax42/SolarCoders-MITPolicyHackathon25" target="_blank" class="p-2 bg-gray-100 hover:bg-copper rounded-full transition-all duration-200 group" title="View Code on GitHub">
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -306,33 +302,27 @@
                     </div>
                 </div>
 
-                <!-- Data Mining Project -->
                 <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" 
-                     data-categories="datascience" id="data-mining">
+                     data-categories="datascience">
                     <div class="relative">
-                        <img src="resources/data-mining.jpg" alt="Data Mining and Statistical Learning" class="w-full h-48 object-cover">
+                        <img src="resources/data-mining.jpg" alt="Data Mining and Statistical Learning" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1551288049-bb848a55a175?auto=format&fit=crop&q=80'">
                         <div class="absolute top-4 right-4 flex gap-2">
                             <span class="bg-copper text-white px-3 py-1 rounded-full text-sm font-medium">Data Science</span>
-                            <span class="bg-sage text-white px-3 py-1 rounded-full text-sm font-medium">Statistics</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-display font-semibold text-navy mb-3">Data Mining & Statistical Learning</h3>
                         <p class="text-gray-600 mb-4">
-                            Comprehensive exploration of data mining techniques and statistical learning methods. Includes implementations of various algorithms, practical applications, and real-world datasets for hands-on learning experiences.
+                            Comprehensive exploration of data mining techniques and statistical learning methods with practical applications and real-world datasets.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">R</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Statistics</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Machine Learning</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <a href="https://github.com/shadowfax42/data-mining-and-statistical-learning" target="_blank" class="text-copper hover:text-navy font-medium transition-colors duration-200">
-                                View Project →
-                            </a>
-                            <a href="https://github.com/shadowfax42/data-mining-and-statistical-learning" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex justify-end items-center mt-4">
+                            <a href="https://github.com/shadowfax42/data-mining-and-statistical-learning" target="_blank" class="p-2 bg-gray-100 hover:bg-copper rounded-full transition-all duration-200 group" title="View Code on GitHub">
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -340,33 +330,27 @@
                     </div>
                 </div>
 
-                <!-- Mushroom Edibility Prediction -->
                 <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" 
-                     data-categories="datascience" id="mushroom-prediction">
+                     data-categories="datascience">
                     <div class="relative">
-                        <img src="resources/mushroom-prediction.jpg" alt="Mushroom Edibility Prediction" class="w-full h-48 object-cover">
+                        <img src="resources/mushroom-prediction.jpg" alt="Mushroom Edibility Prediction" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1598512752271-33f913a5af13?auto=format&fit=crop&q=80'">
                         <div class="absolute top-4 right-4 flex gap-2">
                             <span class="bg-copper text-white px-3 py-1 rounded-full text-sm font-medium">Classification</span>
-                            <span class="bg-sage text-white px-3 py-1 rounded-full text-sm font-medium">ML</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-display font-semibold text-navy mb-3">Mushroom Edibility Prediction</h3>
                         <p class="text-gray-600 mb-4">
-                            Machine learning project for predicting mushroom edibility using various classification algorithms. Features comprehensive data analysis, feature engineering, and model comparison for accurate prediction of edible vs. poisonous mushrooms.
+                            Machine learning project for predicting mushroom edibility using various classification algorithms with comprehensive data analysis.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Scikit-learn</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Classification</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Data Analysis</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <a href="https://github.com/shadowfax42/mushroom-edibility-prediction" target="_blank" class="text-copper hover:text-navy font-medium transition-colors duration-200">
-                                View Project →
-                            </a>
-                            <a href="https://github.com/shadowfax42/mushroom-edibility-prediction" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex justify-end items-center mt-4">
+                            <a href="https://github.com/shadowfax42/mushroom-edibility-prediction" target="_blank" class="p-2 bg-gray-100 hover:bg-copper rounded-full transition-all duration-200 group" title="View Code on GitHub">
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -374,33 +358,27 @@
                     </div>
                 </div>
 
-                <!-- MESA Impact Study -->
                 <div class="project-card bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal" 
-                     data-categories="community,datascience" id="mesa-study">
+                     data-categories="community,datascience">
                     <div class="relative">
-                        <img src="resources/mesa-study.jpg" alt="MESA Impact Study" class="w-full h-48 object-cover">
+                        <img src="resources/mesa-study.jpg" alt="MESA Impact Study" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1427504746383-796ada2af88e?auto=format&fit=crop&q=80'">
                         <div class="absolute top-4 right-4 flex gap-2">
                             <span class="bg-copper text-white px-3 py-1 rounded-full text-sm font-medium">Education</span>
-                            <span class="bg-sage text-white px-3 py-1 rounded-full text-sm font-medium">Research</span>
                         </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-display font-semibold text-navy mb-3">MESA Impact Study</h3>
                         <p class="text-gray-600 mb-4">
-                            Educational research analyzing the impact of MESA (Mathematics, Engineering, Science Achievement) programs on student outcomes. Comprehensive study of 435 high school students across four states using statistical modeling and survey analysis.
+                            Educational research analyzing MESA program impact on 435 high school students across four states using statistical modeling.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">SPSS</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Statistical Analysis</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Education Research</span>
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">STEM</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <a href="https://github.com/shadowfax42/mesa-impact-study" target="_blank" class="text-copper hover:text-navy font-medium transition-colors duration-200">
-                                View Project →
-                            </a>
-                            <a href="https://github.com/shadowfax42/mesa-impact-study" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="flex justify-end items-center mt-4">
+                            <a href="https://github.com/shadowfax42/mesa-impact-study" target="_blank" class="p-2 bg-gray-100 hover:bg-copper rounded-full transition-all duration-200 group" title="View Code on GitHub">
+                                <svg class="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
@@ -411,7 +389,6 @@
         </div>
     </section>
 
-    <!-- Call to Action -->
     <section class="py-20 bg-navy text-white">
         <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 scroll-reveal">
             <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Interested in Collaborating?</h2>
@@ -421,45 +398,53 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-charcoal text-white py-12">
+    <footer class="bg-navy text-white pt-20 pb-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="text-2xl font-display font-bold mb-4">Siham Elmali</div>
-                <!-- <p class="text-gray-400 mb-6">Data Scientist & Engineer</p> -->
-                <div class="flex justify-center space-x-6 mb-8">
-                    <!-- <a href="mailto:siham.elmali@gmail.com" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                    </a> -->
-                    <a href="https://github.com/shadowfax42" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </a>
-                    <a href="https://linkedin.com/in/siham-elmali" target="_blank" class="text-gray-400 hover:text-copper transition-colors duration-200">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                
+                <div class="md:col-span-5">
+                    <a href="#" class="text-3xl font-display font-bold text-white tracking-tighter mb-6 block">SE</a>
+                    <p class="text-gray-400 text-lg leading-relaxed max-w-sm">
+                        Building purpose-driven data solutions that transform complex information into actionable intelligence. 
+                        Let's engineer the future of analytics together.
+                    </p>
+                    <div class="mt-8 flex space-x-5">
+                        <a href="https://github.com/shadowfax42" target="_blank" class="p-2 bg-charcoal hover:bg-copper rounded-lg transition-all duration-300 group" title="GitHub">
+                            <svg class="w-5 h-5 fill-current text-white group-hover:scale-110 transition-transform" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/siham-elmali/" target="_blank" class="p-2 bg-charcoal hover:bg-copper rounded-lg transition-all duration-300 group" title="LinkedIn">
+                            <svg class="w-5 h-5 fill-current text-white group-hover:scale-110 transition-transform" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="https://sihamwrites.substack.com/" target="_blank" class="p-2 bg-charcoal hover:bg-copper rounded-lg transition-all duration-300 group" title="Substack">
+                            <svg class="w-5 h-5 fill-current text-white group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                                <path d="M22.539 8.242H1.46V5.405h21.078v2.837zM1.46 10.881V24L12 18.11L22.54 24V10.881H1.46zM22.54 0H1.46v2.837h21.078V0z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-3">
+                    <h4 class="text-xs uppercase tracking-widest text-copper font-bold mb-6">Navigation</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="footer-link text-gray-400 hover:text-white">Back to Top</a></li>
+                        <li><a href="projects.html" class="footer-link text-gray-400 hover:text-white">Featured Projects</a></li>
+                        <li><a href="https://sihamwrites.substack.com/" target="_blank" class="footer-link text-gray-400 hover:text-white">Writing</a></li>
+                        <li><a href="resources/Siham_Elmali_Nov2025.pdf" target="_blank" class="footer-link text-gray-400 hover:text-white">Professional Resume</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4">
+                    <h4 class="text-xs uppercase tracking-widest text-copper font-bold mb-6">Get in Touch</h4>
+                    <p class="text-gray-400 mb-6">Open to new collaborations, consulting opportunities, or data science discussions.</p>
+                    <a href="mailto:siham.elmali@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-navy font-bold rounded-lg hover:bg-copper hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                        Start a Conversation
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 </div>
-                <p class="text-gray-500 text-sm">
-                    © 2025 Siham Elmali. All rights reserved.
-                </p>
             </div>
         </div>
     </footer>
 
-
-
     <script src="main.js"></script>
-    <script>
-        // Initialize project filtering when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            WebsiteFunctions.initProjectFiltering();
-            initScrollReveal();
-        });
-    </script>
 </body>
 </html>

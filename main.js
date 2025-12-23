@@ -6,27 +6,34 @@ document.addEventListener('DOMContentLoaded', function() {
     initSkillBars();
     initParticleBackground();
     initSmoothScrolling();
+    initProjectFiltering(); // Required for Projects page
+    initContactForm();
 });
 
-// Typewriter effect for hero section
+// 1. Typewriter effect for hero section
 function initTypewriter() {
+    // Check if element exists before initializing (prevents errors on other pages)
+    if (!document.getElementById('typed-text')) return;
+    
     const typed = new Typed('#typed-text', {
         strings: [
             'Siham Elmali',
             'Data Scientist',
+            'Data Engineer',
             'ML Engineer',
             'Problem Solver'
         ],
-        typeSpeed: 80,
-        backSpeed: 60,
+        typeSpeed: 60,
+        backSpeed: 40,
         backDelay: 2000,
         startDelay: 500,
         loop: true,
-        showCursor: false
+        showCursor: true,
+        cursorChar: '|'
     });
 }
 
-// Scroll reveal animations
+// 2. Scroll reveal animations
 function initScrollReveal() {
     const observerOptions = {
         threshold: 0.1,
@@ -47,7 +54,7 @@ function initScrollReveal() {
     });
 }
 
-// Mobile menu functionality
+// 3. Mobile menu functionality
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -59,47 +66,51 @@ function initMobileMenu() {
     }
 }
 
-// Animated skill bars
+// 4. Animated skill bars
 function initSkillBars() {
     const skillBars = document.querySelectorAll('.skill-bar');
     
+    // Only proceed if skill bars exist
+    if(skillBars.length === 0) return;
+
     const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const bar = entry.target;
-                const width = bar.dataset.width;
+                const width = bar.dataset.width || bar.getAttribute('data-width');
                 
                 anime({
                     targets: bar,
-                    scaleX: [0, 1],
-                    width: width,
+                    scaleX: [0, parseFloat(width) / 100], 
                     duration: 1500,
-                    easing: 'easeOutCubic',
-                    delay: anime.stagger(200)
+                    easing: 'easeOutExpo',
+                    delay: 200
                 });
+                
+                // Stop observing after animation
+                skillObserver.unobserve(bar);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.1 });
 
     skillBars.forEach(bar => {
         skillObserver.observe(bar);
     });
 }
 
-// Particle background using p5.js
+// 5. Particle background using p5.js
 function initParticleBackground() {
     const container = document.getElementById('particle-container');
     if (!container) return;
 
     new p5((p) => {
         let particles = [];
-        const numParticles = 50;
+        const numParticles = 40; 
 
         p.setup = () => {
             const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
             canvas.parent('particle-container');
             
-            // Create particles
             for (let i = 0; i < numParticles; i++) {
                 particles.push(new Particle(p));
             }
@@ -107,176 +118,115 @@ function initParticleBackground() {
 
         p.draw = () => {
             p.clear();
-            
-            // Update and display particles
             particles.forEach(particle => {
                 particle.update();
                 particle.display();
             });
-            
-            // Connect nearby particles
-            connectParticles(p, particles);
         };
 
         p.windowResized = () => {
             p.resizeCanvas(container.offsetWidth, container.offsetHeight);
         };
 
-        // Particle class
-        function Particle(p) {
-            this.pos = p.createVector(p.random(p.width), p.random(p.height));
-            this.vel = p.createVector(p.random(-0.5, 0.5), p.random(-0.5, 0.5));
-            this.size = p.random(2, 4);
-            this.opacity = p.random(0.3, 0.8);
-
-            this.update = () => {
-                this.pos.add(this.vel);
+        class Particle {
+            constructor(p) {
+                this.p = p;
+                this.x = p.random(p.width);
+                this.y = p.random(p.height);
+                this.vx = p.random(-0.5, 0.5);
+                this.vy = p.random(-0.5, 0.5);
+                this.size = p.random(2, 5);
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
                 
-                // Wrap around edges
-                if (this.pos.x < 0) this.pos.x = p.width;
-                if (this.pos.x > p.width) this.pos.x = 0;
-                if (this.pos.y < 0) this.pos.y = p.height;
-                if (this.pos.y > p.height) this.pos.y = 0;
-            };
-
-            this.display = () => {
-                p.fill(255, 255, 255, this.opacity * 255);
-                p.noStroke();
-                p.ellipse(this.pos.x, this.pos.y, this.size);
-            };
-        }
-
-        // Connect nearby particles with lines
-        function connectParticles(p, particles) {
-            const maxDistance = 100;
-            
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const distance = p5.Vector.dist(particles[i].pos, particles[j].pos);
-                    
-                    if (distance < maxDistance) {
-                        const alpha = p.map(distance, 0, maxDistance, 0.3, 0);
-                        p.stroke(255, 255, 255, alpha * 255);
-                        p.strokeWeight(0.5);
-                        p.line(
-                            particles[i].pos.x, particles[i].pos.y,
-                            particles[j].pos.x, particles[j].pos.y
-                        );
-                    }
-                }
+                if (this.x < 0 || this.x > this.p.width) this.vx *= -1;
+                if (this.y < 0 || this.y > this.p.height) this.vy *= -1;
+            }
+            display() {
+                this.p.noStroke();
+                this.p.fill(193, 120, 23, 100); // Copper color
+                this.p.circle(this.x, this.y, this.size);
             }
         }
     });
 }
 
-// Smooth scrolling for anchor links
+// 6. Smooth scrolling for anchor links
 function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return; // Ignore empty anchors
+            
+            const target = document.querySelector(targetId);
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
             }
         });
     });
 }
 
-// Project filtering functionality (for projects page)
+// 7. Project Filtering (Essential for projects.html)
 function initProjectFiltering() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
+    if (!filterBtns.length) return;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update Active Visual State
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter Projects
+            const filterValue = btn.getAttribute('data-filter');
             
-            // Update active button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            // Filter projects
             projectCards.forEach(card => {
-                const categories = card.dataset.categories.split(',');
+                const categories = card.getAttribute('data-categories') ? card.getAttribute('data-categories').split(',') : [];
                 
-                if (filter === 'all' || categories.includes(filter)) {
+                if (filterValue === 'all' || categories.includes(filterValue)) {
+                    card.style.display = 'block';
+                    
+                    // Reset animation
                     anime({
                         targets: card,
                         opacity: [0, 1],
-                        scale: [0.8, 1],
-                        duration: 500,
-                        easing: 'easeOutCubic'
+                        scale: [0.95, 1],
+                        duration: 400,
+                        easing: 'easeOutQuad'
                     });
-                    card.style.display = 'block';
                 } else {
-                    anime({
-                        targets: card,
-                        opacity: [1, 0],
-                        scale: [1, 0.8],
-                        duration: 300,
-                        easing: 'easeInCubic',
-                        complete: () => {
-                            card.style.display = 'none';
-                        }
-                    });
+                    card.style.display = 'none';
                 }
             });
         });
     });
 }
 
-// Modal functionality for project details
-function openProjectModal(projectId) {
-    const modal = document.getElementById(`modal-${projectId}`);
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        
-        anime({
-            targets: modal.querySelector('.modal-content'),
-            scale: [0.8, 1],
-            opacity: [0, 1],
-            duration: 300,
-            easing: 'easeOutCubic'
-        });
-    }
-}
-
-function closeProjectModal(projectId) {
-    const modal = document.getElementById(`modal-${projectId}`);
-    if (modal) {
-        anime({
-            targets: modal.querySelector('.modal-content'),
-            scale: [1, 0.8],
-            opacity: [1, 0],
-            duration: 200,
-            easing: 'easeInCubic',
-            complete: () => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        });
-    }
-}
-
-// Contact form functionality
+// 8. Contact form functionality
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Get form data
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         
-        // Validate form
         if (validateContactForm(data)) {
-            // Show success message
             showFormMessage('Thank you for your message! I\'ll get back to you soon.', 'success');
             form.reset();
         } else {
@@ -287,18 +237,14 @@ function initContactForm() {
 
 function validateContactForm(data) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    return data.name && 
-           data.email && 
-           emailRegex.test(data.email) && 
-           data.subject && 
-           data.message;
+    return data.name && data.email && emailRegex.test(data.email) && data.message;
 }
 
 function showFormMessage(message, type) {
+    // Create feedback element
     const messageDiv = document.createElement('div');
-    messageDiv.className = `fixed top-20 right-4 p-4 rounded-lg shadow-lg z-50 ${
-        type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+    messageDiv.className = `fixed top-24 right-4 p-4 rounded-lg shadow-lg z-50 ${
+        type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'
     }`;
     messageDiv.textContent = message;
     
@@ -307,9 +253,9 @@ function showFormMessage(message, type) {
     // Animate in
     anime({
         targets: messageDiv,
-        translateX: [300, 0],
+        translateX: [100, 0],
         opacity: [0, 1],
-        duration: 300,
+        duration: 400,
         easing: 'easeOutCubic'
     });
     
@@ -317,27 +263,20 @@ function showFormMessage(message, type) {
     setTimeout(() => {
         anime({
             targets: messageDiv,
-            translateX: [0, 300],
+            translateX: [0, 100],
             opacity: [1, 0],
-            duration: 300,
+            duration: 400,
             easing: 'easeInCubic',
             complete: () => {
-                document.body.removeChild(messageDiv);
+                if(document.body.contains(messageDiv)) {
+                    document.body.removeChild(messageDiv);
+                }
             }
         });
     }, 3000);
 }
 
-// Skills radar chart (for about page)
-function initSkillsRadarChart() {
-    const chartContainer = document.getElementById('skills-radar-chart');
-    if (!chartContainer) return;
-
-    // This would be implemented with ECharts.js when the about page is created
-    console.log('Skills radar chart would be initialized here');
-}
-
-// Utility functions
+// 9. Navbar Scroll Styling (Debounced)
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -350,21 +289,48 @@ function debounce(func, wait) {
     };
 }
 
-// Add scroll-based navbar styling
 window.addEventListener('scroll', debounce(() => {
     const navbar = document.querySelector('nav');
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('shadow-md');
+        } else {
+            navbar.classList.remove('shadow-md');
+        }
     }
 }, 10));
 
-// Export functions for use in other pages
-window.WebsiteFunctions = {
-    initProjectFiltering,
-    openProjectModal,
-    closeProjectModal,
-    initContactForm,
-    initSkillsRadarChart
-};
+// 10. Modal functionality (Exposed to window for inline HTML onclicks)
+window.openProjectModal = function(projectId) {
+    const modal = document.getElementById(`modal-${projectId}`);
+    if (modal) {
+        modal.classList.remove('hidden');
+        // Prevent background scrolling
+        document.body.style.overflow = 'hidden'; 
+        
+        anime({
+            targets: modal.querySelector('.modal-content'),
+            scale: [0.9, 1],
+            opacity: [0, 1],
+            duration: 300,
+            easing: 'easeOutCubic'
+        });
+    }
+}
+
+window.closeProjectModal = function(projectId) {
+    const modal = document.getElementById(`modal-${projectId}`);
+    if (modal) {
+        anime({
+            targets: modal.querySelector('.modal-content'),
+            scale: [1, 0.9],
+            opacity: [1, 0],
+            duration: 200,
+            easing: 'easeInCubic',
+            complete: () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+}
