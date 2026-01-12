@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Siham Elmali</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
     <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
@@ -22,7 +25,7 @@
                         'mono': ['JetBrains Mono', 'monospace']
                     },
                     colors: {
-                        'navy': '#1a1f36',
+                        'sage': '#1a1f36',
                         'copper': '#c17817',
                         'sage': '#7c9885',
                         'charcoal': '#2d3748',
@@ -36,26 +39,101 @@
     </script>
     
     <style>
-        .nav-blur { backdrop-filter: blur(20px); background: rgba(250, 250, 250, 0.9); }
-        .dark .nav-blur { background: rgba(15, 23, 42, 0.9); }
-        .scroll-reveal { opacity: 0; transform: translateY(30px); }
-        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(250, 250, 250, 0.9);
+        }
+        .dark .nav-blur {
+            background: rgba(15, 23, 42, 0.9);
+        }
         
-        .timeline-item { position: relative; padding-left: 2rem; }
-        .timeline-item::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 12px; height: 12px; background: #c17817; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 3px #c17817; }
-        .dark .timeline-item::before { border-color: #1e293b; } /* Dark mode border fix */
-        .timeline-item::after { content: ''; position: absolute; left: 5px; top: 1.5rem; width: 2px; height: calc(100% - 1rem); background: #e2e8f0; }
-        .dark .timeline-item::after { background: #374151; }
-        .timeline-item:last-child::after { display: none; }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
         
-        .skill-category { transition: all 0.3s ease; cursor: pointer; }
-        .skill-category:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
         
-        .certification-badge { background: linear-gradient(135deg, #c17817, #7c9885); color: white; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; display: inline-block; margin: 0.25rem; }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #c17817;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #c17817;
+        }
+        .dark .timeline-item::before {
+            border-color: #1e293b;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: #e2e8f0;
+        }
+        .dark .timeline-item::after {
+            background: #374151;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .skill-category {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .certification-badge {
+            background: linear-gradient(135deg, #c17817, #7c9885);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.25rem;
+        }
 
-        .footer-link { position: relative; transition: color 0.3s ease; }
-        .footer-link::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0; background-color: #c17817; transition: width 0.3s ease; }
-        .footer-link:hover::after { width: 100%; }
+        .footer-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #c17817;
+            transition: width 0.3s ease;
+        }
+        .footer-link:hover::after {
+            width: 100%;
+        }
     </style>
 </head>
 <body id="top" class="font-body bg-gray-50 text-charcoal dark:bg-dark-bg dark:text-gray-300 transition-colors duration-300">
@@ -63,74 +141,82 @@
     <div id="navbar-placeholder"></div>
 
     <section class="py-20 bg-white dark:bg-dark-bg overflow-hidden transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 scroll-reveal">
-                <h1 class="text-4xl md:text-5xl font-display font-bold text-navy dark:text-white">
-                    From Morocco to <span class="text-copper">Silicon Valley</span>
-                </h1>
-            </div>
+    <div class="w-full px-6 lg:px-12">
+        
+        <div class="text-center mb-16 scroll-reveal">
+            <h1 class="text-4xl md:text-5xl font-display font-bold text-sage dark:text-white">
+                From Morocco to <span class="text-copper">Silicon Valley</span>
+            </h1>
+        </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-                <div class="scroll-reveal">
-                    <div class="prose prose-lg text-gray-600 dark:text-gray-300 mb-8">
-                        <p class="leading-relaxed mb-6 text-charcoal dark:text-gray-200 font-medium">
-                            <span class="float-left text-9xl font-display font-bold text-copper pr-3 leading-[0.68] mt-0.5">I</span>
-                            came to the U.S. alone from Morocco at 19 years old with $100 in my pocket. I supported myself by working 5 a.m. shifts bussing tables, cleaning hotel rooms, and hosting at restaurants. I went to college at night and on my days off.
-                        </p>
-                        <p class="leading-relaxed mb-6">
-                            It was hard, but I learned how to stay focused and keep going, even when things were overwhelming. That experience shaped who I am today. 
-                        </p>
-                        <p class="leading-relaxed mb-6">
-                            <strong>I was fortunate to attend Johns Hopkins University on a grant, earning my B.S. in Electrical Engineering and M.S.E in Electrical and Computer Engineering.</strong>
-                        </p>
-                        <p class="leading-relaxed mb-6">
-                            Today, I apply that same grit to solving complex data challenges. Whether I'm leading validation teams in the semiconductor industry or mentoring graduate students at Georgia Tech, I am driven by a commitment to technical excellence and a desire to empower the next generation of engineers.
-                        </p>
-                        <hr class="border-gray-200 dark:border-gray-700 my-8">
-                        <p class="leading-relaxed">
-                            Professionally, I specialize in Data Science and Machine Learning to solve complex problems. My background spans Full-Stack development and end-to-end analytics. Currently a Senior Data Scientist at Intel and an Instructional Associate at Georgia Tech, I combine technical leadership with a passion for teaching.
-                        </p>
-                    </div>
-
-                    <div class="flex flex-wrap gap-3 mt-8">
-                        <span class="px-4 py-2 bg-navy dark:bg-copper text-white rounded-md text-sm font-mono shadow-md">Data Science & ML</span>
-                        <span class="px-4 py-2 bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 text-charcoal dark:text-gray-300 rounded-md text-sm font-mono hover:border-copper transition-colors">Stats & Probability</span>
-                        <span class="px-4 py-2 bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 text-charcoal dark:text-gray-300 rounded-md text-sm font-mono hover:border-copper transition-colors">Big Data Analytics</span>
-                        <span class="px-4 py-2 bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 text-charcoal dark:text-gray-300 rounded-md text-sm font-mono hover:border-copper transition-colors">Full-Stack Engineering</span>
-                        <span class="px-4 py-2 bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 text-charcoal dark:text-gray-300 rounded-md text-sm font-mono hover:border-copper transition-colors">Leadership</span>
-                    </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            
+            <div class="scroll-reveal">
+                <div class="prose prose-lg text-gray-600 dark:text-gray-300 mb-8">
+                    <p class="leading-relaxed mb-6 text-charcoal dark:text-gray-200 font-medium">
+                    <span class="float-left text-9xl font-display font-bold text-copper pr-3 leading-[0.68] mt-0.5">
+                        I
+                        </span>
+                        came to the U.S. alone from Morocco at 19 years old with $100 in my pocket. I supported myself by working 5 a.m. shifts bussing tables, cleaning hotel rooms, and hosting at restaurants. I went to college at night and on my days off.
+                    </p>
+                    <p class="leading-relaxed mb-6">
+                        It was hard, but I learned how to stay focused and keep going, even when things were overwhelming. That experience shaped who I am today. </p>
+                       <p class="leading-relaxed mb-6">
+                         <strong>I was fortunate to attend Johns Hopkins University on a grant, earning my B.S. in Electrical Engineering and M.S.E in Electrical and Computer Engineering.</strong>
+                    </p>
+    
+                    <p class="leading-relaxed mb-6">
+                        Today, I apply that same grit to solving complex data challenges. Whether I'm leading validation teams in the semiconductor industry or mentoring graduate students at Georgia Tech, I am driven by a commitment to technical excellence and a desire to empower the next generation of engineers.
+                    </p>
+                    <hr class="border-gray-200 dark:border-gray-700 my-8">
+                    <p class="leading-relaxed">
+Professionally, I specialize in Data Science and Machine Learning to solve complex problems. My background spans Full-Stack development and end-to-end analytics. Currently a Senior Data Scientist at Intel and an Instructional Associate at Georgia Tech, I combine technical leadership with a passion for teaching.                     </p>
                 </div>
 
-                <div class="relative scroll-reveal">
-                    <div class="max-w-md mx-auto relative">
-                        <div class="absolute top-0 -left-4 w-72 h-72 bg-copper opacity-10 rounded-full blur-3xl filter"></div>
-                        <div class="absolute bottom-0 -right-4 w-72 h-72 bg-navy opacity-10 rounded-full blur-3xl filter"></div>
-                        
-                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-700">
-                            <img src="resources/siham.jpg" alt="Siham Elmali" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80'">
-                        </div>
-                        
-                        <div class="absolute -bottom-6 -right-6 bg-white dark:bg-card-dark p-4 rounded-lg shadow-xl hidden md:block">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-sage bg-opacity-20 rounded-full flex items-center justify-center text-sage">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-[10px] text-gray-400 dark:text-gray-500 font-medium uppercase tracking-widest">Experience</p>
-                                    <p class="text-navy dark:text-white text-xl font-semibold leading-none">8+ Years</p>
-                                </div>
+                <div class="flex flex-wrap gap-3 mt-8">
+                    <span class="px-4 py-2 bg-sage dark:bg-copper text-white rounded-md text-sm font-mono shadow-md">Data Science & ML</span>
+                    <span class="px-4 py-2 bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 text-charcoal dark:text-gray-300 rounded-md text-sm font-mono hover:border-copper transition-colors">Stats & Probability</span>
+                    <span class="px-4 py-2 bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 text-charcoal dark:text-gray-300 rounded-md text-sm font-mono hover:border-copper transition-colors">Big Data Analytics</span>
+                    <span class="px-4 py-2 bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 text-charcoal dark:text-gray-300 rounded-md text-sm font-mono hover:border-copper transition-colors">Full-Stack Engineering</span>
+                    <span class="px-4 py-2 bg-white dark:bg-card-dark border border-gray-200 dark:border-gray-700 text-charcoal dark:text-gray-300 rounded-md text-sm font-mono hover:border-copper transition-colors">Leadership</span>
+                </div>
+            </div>
+
+            <div class="relative scroll-reveal">
+                <div class="max-w-md mx-auto relative">
+                    <div class="absolute top-0 -left-4 w-72 h-72 bg-copper opacity-10 rounded-full blur-3xl filter"></div>
+                    <div class="absolute bottom-0 -right-4 w-72 h-72 bg-sage opacity-10 rounded-full blur-3xl filter"></div>
+                    
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-700">
+                        <img src="resources/siham.jpg" alt="Siham Elmali" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80'">
+                    </div>
+                    
+                    <div class="absolute -bottom-6 -right-6 bg-white dark:bg-card-dark p-4 rounded-lg shadow-xl hidden md:block">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-sage bg-opacity-20 rounded-full flex items-center justify-center text-sage">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                            </div>
+                            <div class="text-center">
+                            <p class="text-[10px] text-gray-400 dark:text-gray-500 font-medium uppercase tracking-widest">
+                                Experience
+                            </p>
+                            <p class="text-sage dark:text-white text-xl font-semibold leading-none">
+                                8+ Years
+                            </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full px-6 lg:px-12">
             <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-4xl md:text-5xl font-display font-bold text-navy dark:text-white mb-6">Technical Skills</h2>
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-sage dark:text-white mb-6">Technical Skills</h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                     A comprehensive overview of my technical expertise across data science, AI tools, and infrastructure.
                 </p>
@@ -141,10 +227,10 @@
                     <div id="skills-radar-chart" class="w-full h-96 bg-white dark:bg-card-dark rounded-xl shadow-lg p-6"></div>
                 </div>
                 <div class="scroll-reveal">
-                    <h3 class="text-2xl font-display font-semibold text-navy dark:text-white mb-6">Skill Categories</h3>
+                    <h3 class="text-2xl font-display font-semibold text-sage dark:text-white mb-6">Skill Categories</h3>
                     <div class="space-y-4">
                         <div class="skill-category bg-white dark:bg-card-dark rounded-lg p-4 shadow-md">
-                            <h4 class="font-semibold text-navy dark:text-white mb-2">Programming & Databases</h4>
+                            <h4 class="font-semibold text-sage dark:text-white mb-2">Programming & Databases</h4>
                             <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">Python, R, SQL, Bash, JavaScript, TypeScript, HTML/CSS, Flask, FastAPI, PostgreSQL, MySQL, MongoDB</p>
                             <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                 <div class="bg-copper h-2 rounded-full" style="width: 95%"></div>
@@ -152,7 +238,7 @@
                         </div>
                         
                         <div class="skill-category bg-white dark:bg-card-dark rounded-lg p-4 shadow-md">
-                            <h4 class="font-semibold text-navy dark:text-white mb-2">Data Engineering & Viz</h4>
+                            <h4 class="font-semibold text-sage dark:text-white mb-2">Data Engineering & Viz</h4>
                             <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">PySpark, Pandas, Seaborn, Matplotlib, Plotly (Dash), PowerBI, Tableau</p>
                             <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                 <div class="bg-sage h-2 rounded-full" style="width: 90%"></div>
@@ -160,7 +246,7 @@
                         </div>
                         
                         <div class="skill-category bg-white dark:bg-card-dark rounded-lg p-4 shadow-md">
-                            <h4 class="font-semibold text-navy dark:text-white mb-2">Machine Learning & AI</h4>
+                            <h4 class="font-semibold text-sage dark:text-white mb-2">Machine Learning & AI</h4>
                             <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">scikit-learn, NumPy, XGBoost, SciPy, PyTorch, OpenAI, Claude, Gemini, Ollama, DeepSeek</p>
                             <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                 <div class="bg-copper h-2 rounded-full" style="width: 88%"></div>
@@ -168,7 +254,7 @@
                         </div>
                         
                         <div class="skill-category bg-white dark:bg-card-dark rounded-lg p-4 shadow-md">
-                            <h4 class="font-semibold text-navy dark:text-white mb-2">MLOps & Infrastructure</h4>
+                            <h4 class="font-semibold text-sage dark:text-white mb-2">MLOps & Infrastructure</h4>
                             <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">Azure, Databricks, Docker, Kubernetes, Celery, Git/GitHub Actions, Linux/Unix, CI/CD</p>
                             <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                 <div class="bg-sage h-2 rounded-full" style="width: 85%"></div>
@@ -181,9 +267,9 @@
     </section>
 
     <section class="py-20 bg-white dark:bg-dark-bg transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full px-6 lg:px-12">
             <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-4xl md:text-5xl font-display font-bold text-navy dark:text-white mb-6">Professional Journey</h2>
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-sage dark:text-white mb-6">Professional Journey</h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                     A timeline of my career progression, from semiconductor engineering to data science leadership.
                 </p>
@@ -195,7 +281,7 @@
                         <div class="bg-gray-50 dark:bg-card-dark rounded-xl p-6">
                             <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                                 <div>
-                                    <h3 class="text-xl font-display font-semibold text-navy dark:text-white">Instructional Associate/Staff</h3>
+                                    <h3 class="text-xl font-display font-semibold text-sage dark:text-white">Instructional Associate/Staff</h3>
                                     <p class="text-copper font-medium">Georgia Institute of Technology, Atlanta, GA (Remote)</p>
                                 </div>
                                 <span class="text-gray-500 dark:text-gray-400 font-medium">May 2025 – Present</span>
@@ -206,7 +292,7 @@
                             <div class="flex flex-wrap gap-2">
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">Teaching</span>
                                 <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Simulation</span>
-                                <span class="bg-navy bg-opacity-20 text-navy px-3 py-1 rounded-full text-sm">Statistics</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Statistics</span>
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">Mentorship</span>
                             </div>
                         </div>
@@ -216,7 +302,7 @@
                         <div class="bg-gray-50 dark:bg-card-dark rounded-xl p-6">
                             <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                                 <div>
-                                    <h3 class="text-xl font-display font-semibold text-navy dark:text-white">Senior Data Scientist — Analytics & Insights Management</h3>
+                                    <h3 class="text-xl font-display font-semibold text-sage dark:text-white">Senior Data Scientist — Analytics & Insights Management</h3>
                                     <p class="text-copper font-medium">Intel Corporation, Santa Clara, CA</p>
                                 </div>
                                 <span class="text-gray-500 dark:text-gray-400 font-medium">Apr 2023 – Present</span>
@@ -229,10 +315,10 @@
                             </p>
                             <div class="flex flex-wrap gap-2">
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">Python</span>
-                                <span class="bg-navy bg-opacity-20 text-navy px-3 py-1 rounded-full text-sm">Flask</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Flask</span>
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">Docker</span>
                                 <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">LLM Integration</span>
-                                <span class="bg-navy bg-opacity-20 text-navy px-3 py-1 rounded-full text-sm">TypeScript</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">TypeScript</span>
                             </div>
                         </div>
                     </div>
@@ -241,7 +327,7 @@
                         <div class="bg-gray-50 dark:bg-card-dark rounded-xl p-6">
                             <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                                 <div>
-                                    <h3 class="text-xl font-display font-semibold text-navy dark:text-white">Data Scientist — Data Governance Team</h3>
+                                    <h3 class="text-xl font-display font-semibold text-sage dark:text-white">Data Scientist — Data Governance Team</h3>
                                     <p class="text-copper font-medium">Intel Corporation, Santa Clara, CA</p>
                                 </div>
                                 <span class="text-gray-500 dark:text-gray-400 font-medium">Nov 2021 – Apr 2023</span>
@@ -254,9 +340,9 @@
                             <div class="flex flex-wrap gap-2">
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">Power BI</span>
                                 <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Azure</span>
-                                <span class="bg-navy bg-opacity-20 text-navy px-3 py-1 rounded-full text-sm">SparkML</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">SparkML</span>
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">R</span>
-                                <span class="bg-navy bg-opacity-20 text-navy px-3 py-1 rounded-full text-sm">SQL</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">SQL</span>
                             </div>
                         </div>
                     </div>
@@ -265,7 +351,7 @@
                         <div class="bg-gray-50 dark:bg-card-dark rounded-xl p-6">
                             <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                                 <div>
-                                    <h3 class="text-xl font-display font-semibold text-navy dark:text-white">Product Development Engineer — Cache Memory Team</h3>
+                                    <h3 class="text-xl font-display font-semibold text-sage dark:text-white">Product Development Engineer — Cache Memory Team</h3>
                                     <p class="text-copper font-medium">Intel Corporation, Santa Clara, CA</p>
                                 </div>
                                 <span class="text-gray-500 dark:text-gray-400 font-medium">Jul 2017 – Nov 2021</span>
@@ -278,7 +364,7 @@
                             <div class="flex flex-wrap gap-2">
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">XGBoost</span>
                                 <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Kubernetes</span>
-                                <span class="bg-navy bg-opacity-20 text-navy px-3 py-1 rounded-full text-sm">Tableau</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Tableau</span>
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">SystemVerilog</span>
                             </div>
                         </div>
@@ -288,7 +374,7 @@
                         <div class="bg-gray-50 dark:bg-card-dark rounded-xl p-6">
                             <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                                 <div>
-                                    <h3 class="text-xl font-display font-semibold text-navy dark:text-white">Engineering Intern</h3>
+                                    <h3 class="text-xl font-display font-semibold text-sage dark:text-white">Engineering Intern</h3>
                                     <p class="text-copper font-medium">Johns Hopkins University Applied Physics Laboratory, Laurel, MD</p>
                                 </div>
                                 <span class="text-gray-500 dark:text-gray-400 font-medium">Jun 2016 – Jan 2017</span>
@@ -299,7 +385,7 @@
                             <div class="flex flex-wrap gap-2">
                                 <span class="bg-copper bg-opacity-20 text-copper px-3 py-1 rounded-full text-sm">MATLAB</span>
                                 <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Signal Processing</span>
-                                <span class="bg-navy bg-opacity-20 text-navy px-3 py-1 rounded-full text-sm">Radar Systems</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Radar Systems</span>
                             </div>
                         </div>
                     </div>
@@ -309,13 +395,13 @@
     </section>
 
     <section class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full px-6 lg:px-12">
             <div class="grid lg:grid-cols-2 gap-12">
                 <div class="scroll-reveal">
-                    <h2 class="text-3xl font-display font-bold text-navy dark:text-white mb-8">Education</h2>
+                    <h2 class="text-3xl font-display font-bold text-sage dark:text-white mb-8">Education</h2>
                     <div class="space-y-6">
                         <div class="bg-white dark:bg-card-dark rounded-xl p-6 shadow-lg">
-                            <h3 class="text-xl font-display font-semibold text-navy dark:text-white mb-2">Master of Science in Analytics</h3>
+                            <h3 class="text-xl font-display font-semibold text-sage dark:text-white mb-2">Master of Science in Analytics</h3>
                             <p class="text-copper font-medium mb-2">Georgia Institute of Technology</p>
                             <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">Aug 2020 – May 2023</p>
                             <p class="text-gray-600 dark:text-gray-400 text-sm">
@@ -324,13 +410,13 @@
                         </div>
                         
                         <div class="bg-white dark:bg-card-dark rounded-xl p-6 shadow-lg">
-                            <h3 class="text-xl font-display font-semibold text-navy dark:text-white mb-2">Master of Engineering in ECE</h3>
+                            <h3 class="text-xl font-display font-semibold text-sage dark:text-white mb-2">Master of Engineering in ECE</h3>
                             <p class="text-copper font-medium mb-2">Johns Hopkins University</p>
                             <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">Jan 2016 – May 2017</p>
                         </div>
                         
                         <div class="bg-white dark:bg-card-dark rounded-xl p-6 shadow-lg">
-                            <h3 class="text-xl font-display font-semibold text-navy dark:text-white mb-2">Bachelor of Science in EE</h3>
+                            <h3 class="text-xl font-display font-semibold text-sage dark:text-white mb-2">Bachelor of Science in EE</h3>
                             <p class="text-copper font-medium mb-2">Johns Hopkins University</p>
                             <p class="text-gray-600 dark:text-gray-400 text-sm mb-3">Aug 2014 – May 2017</p>
                         </div>
@@ -338,9 +424,9 @@
                 </div>
                 
                 <div class="scroll-reveal">
-                    <h2 class="text-3xl font-display font-bold text-navy dark:text-white mb-8">Certifications & Research</h2>
+                    <h2 class="text-3xl font-display font-bold text-sage dark:text-white mb-8">Certifications & Research</h2>
                     <div class="bg-white dark:bg-card-dark rounded-xl p-6 shadow-lg mb-6">
-                        <h3 class="text-xl font-display font-semibold text-navy dark:text-white mb-4">Professional Certifications</h3>
+                        <h3 class="text-xl font-display font-semibold text-sage dark:text-white mb-4">Professional Certifications</h3>
                         <div class="space-y-3">
                             <div class="certification-badge">
                                 Lean Six Sigma Green Belt (Intel, Sep 2025)
@@ -352,10 +438,10 @@
                     </div>
                     
                     <div class="bg-white dark:bg-card-dark rounded-xl p-6 shadow-lg">
-                        <h3 class="text-xl font-display font-semibold text-navy dark:text-white mb-4">Research Experience</h3>
+                        <h3 class="text-xl font-display font-semibold text-sage dark:text-white mb-4">Research Experience</h3>
                         <div class="space-y-6">
                             <div>
-                                <h4 class="font-semibold text-navy dark:text-white">Research Assistant</h4>
+                                <h4 class="font-semibold text-sage dark:text-white">Research Assistant</h4>
                                 <div class="flex justify-between items-baseline flex-wrap">
                                     <p class="text-copper text-sm font-medium">Johns Hopkins University</p>
                                     <span class="text-gray-500 dark:text-gray-400 text-xs">May 2015 – Dec 2015</span>
@@ -367,7 +453,7 @@
                             </div>
 
                             <div class="border-t border-gray-100 dark:border-gray-700 pt-4">
-                                <h4 class="font-semibold text-navy dark:text-white">Research Assistant, Engineering Education Research</h4>
+                                <h4 class="font-semibold text-sage dark:text-white">Research Assistant, Engineering Education Research</h4>
                                 <div class="flex justify-between items-baseline flex-wrap">
                                     <p class="text-copper text-sm font-medium">Utah State University</p>
                                     <span class="text-gray-500 dark:text-gray-400 text-xs">May 2014 – Aug 2014</span>
@@ -385,56 +471,56 @@
     </section>
 
     <section class="py-20 bg-white dark:bg-dark-bg transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full px-6 lg:px-12">
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="scroll-reveal">
-                    <h2 class="text-3xl font-display font-bold text-navy dark:text-white mb-6">Languages</h2>
+                    <h2 class="text-3xl font-display font-bold text-sage dark:text-white mb-6">Languages</h2>
                     <div class="space-y-4">
                         <div class="flex justify-between items-center p-4 bg-gray-50 dark:bg-card-dark rounded-lg">
-                            <span class="font-medium text-navy dark:text-white">English</span>
+                            <span class="font-medium text-sage dark:text-white">English</span>
                             <span class="text-copper font-medium">Fluent</span>
                         </div>
                         <div class="flex justify-between items-center p-4 bg-gray-50 dark:bg-card-dark rounded-lg">
-                            <span class="font-medium text-navy dark:text-white">Arabic</span>
+                            <span class="font-medium text-sage dark:text-white">Arabic</span>
                             <span class="text-copper font-medium">Fluent</span>
                         </div>
                         <div class="flex justify-between items-center p-4 bg-gray-50 dark:bg-card-dark rounded-lg">
-                            <span class="font-medium text-navy dark:text-white">Moroccan Darija</span>
+                            <span class="font-medium text-sage dark:text-white">Moroccan Darija</span>
                             <span class="text-copper font-medium">Native</span>
                         </div>
                         <div class="flex justify-between items-center p-4 bg-gray-50 dark:bg-card-dark rounded-lg">
-                            <span class="font-medium text-navy dark:text-white">French</span>
+                            <span class="font-medium text-sage dark:text-white">French</span>
                             <span class="text-sage font-medium">Conversational</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="scroll-reveal">
-                    <h2 class="text-3xl font-display font-bold text-navy dark:text-white mb-6">Interests</h2>
+                    <h2 class="text-3xl font-display font-bold text-sage dark:text-white mb-6">Interests</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div class="text-center p-6 bg-gray-50 dark:bg-card-dark rounded-xl">
                             <div class="text-3xl mb-3">👨‍🍳</div>
-                            <h3 class="font-semibold text-navy dark:text-white">Baking & Cooking</h3>
+                            <h3 class="font-semibold text-sage dark:text-white">Baking & Cooking</h3>
                         </div>
                         <div class="text-center p-6 bg-gray-50 dark:bg-card-dark rounded-xl">
                             <div class="text-3xl mb-3">🎾</div>
-                            <h3 class="font-semibold text-navy dark:text-white">Tennis</h3>
+                            <h3 class="font-semibold text-sage dark:text-white">Tennis</h3>
                         </div>
                         <div class="text-center p-6 bg-gray-50 dark:bg-card-dark rounded-xl">
                             <div class="text-3xl mb-3">🚀</div>
-                            <h3 class="font-semibold text-navy dark:text-white">Sci-Fi</h3>
+                            <h3 class="font-semibold text-sage dark:text-white">Sci-Fi</h3>
                         </div>
                         <div class="text-center p-6 bg-gray-50 dark:bg-card-dark rounded-xl">
                             <div class="text-3xl mb-3">⚽</div>
-                            <h3 class="font-semibold text-navy dark:text-white">Soccer</h3>
+                            <h3 class="font-semibold text-sage dark:text-white">Soccer</h3>
                         </div>
                         <div class="text-center p-6 bg-gray-50 dark:bg-card-dark rounded-xl">
                             <div class="text-3xl mb-3">🥾</div>
-                            <h3 class="font-semibold text-navy dark:text-white">Hiking</h3>
+                            <h3 class="font-semibold text-sage dark:text-white">Hiking</h3>
                         </div>
                           <div class="text-center p-6 bg-gray-50 dark:bg-card-dark rounded-xl">
                             <div class="text-3xl mb-3">📚</div>
-                            <h3 class="font-semibold text-navy dark:text-white">Reading</h3>
+                            <h3 class="font-semibold text-sage dark:text-white">Reading</h3>
                         </div>
                     </div>
                 </div>

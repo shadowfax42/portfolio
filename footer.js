@@ -2,7 +2,7 @@
 
 const footerHTML = `
 <footer class="bg-navy dark:bg-gray-900 text-white pt-20 pb-10 border-t border-transparent dark:border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full px-6 lg:px-12">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
             
             <div class="md:col-span-5">
@@ -25,14 +25,13 @@ const footerHTML = `
                     <li><a href="index.html" class="footer-link text-gray-400 hover:text-white">Home</a></li>
                     <li><a href="projects.html" class="footer-link text-gray-400 hover:text-white">Projects</a></li>
                     <li><a href="about.html" class="footer-link text-gray-400 hover:text-white">About Me</a></li>
-                    <li><a href="resources/Siham_Elmali_Nov2025.pdf" target="_blank" class="footer-link text-gray-400 hover:text-white">Resume</a></li>
                 </ul>
             </div>
 
             <div class="md:col-span-4">
                 <h4 class="text-xs uppercase tracking-widest text-copper font-bold mb-6">Connect</h4>
                 <p class="text-gray-400 mb-6">Interested in discussing data infrastructure or analytics?</p>
-                <a href="mailto:siham.elmali@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-navy font-bold rounded-lg hover:bg-copper hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <a href="mailto:siham.elmali@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-bold rounded-lg hover:bg-copper hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                     Send a Message
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>

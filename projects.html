@@ -44,18 +44,75 @@
             position: relative;
         }
 
-        .particle-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .project-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .project-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
-        .filter-btn { transition: all 0.3s ease; }
-        .filter-btn.active { background: linear-gradient(135deg, #c17817, #7c9885); color: white !important; border-color: transparent !important; box-shadow: 0 10px 25px -5px rgba(193, 120, 23, 0.4); }
-        .nav-blur { backdrop-filter: blur(20px); background: rgba(250, 250, 250, 0.9); }
-        .dark .nav-blur { background: rgba(15, 23, 42, 0.9); border-color: #1e293b; }
-        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
-        .footer-link { position: relative; transition: color 0.3s ease; }
-        .footer-link::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0; background-color: #c17817; transition: width 0.3s ease; }
-        .footer-link:hover::after { width: 100%; }
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .project-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Active state for filter buttons */
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, #c17817, #7c9885);
+            color: white !important;
+            border-color: transparent !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(193, 120, 23, 0.4);
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(250, 250, 250, 0.9);
+        }
+        .dark .nav-blur {
+            background: rgba(15, 23, 42, 0.9);
+            border-color: #1e293b;
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #c17817;
+            transition: width 0.3s ease;
+        }
+        .footer-link:hover::after {
+            width: 100%;
+        }
     </style>
 </head>
 <body id="top" class="font-body bg-gray-50 text-charcoal dark:bg-dark-bg dark:text-gray-300 transition-colors duration-300">
@@ -73,19 +130,29 @@
     </section>
 
     <section class="py-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full px-6 lg:px-12">
             <div class="flex flex-wrap justify-center gap-4">
-                <button class="filter-btn active px-6 py-3 rounded-full font-medium border-2 border-copper text-copper dark:text-copper" data-filter="all">All Projects</button>
-                <button class="filter-btn px-6 py-3 rounded-full font-medium border-2 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-copper hover:text-copper" data-filter="fullstack">Full-Stack</button>
-                <button class="filter-btn px-6 py-3 rounded-full font-medium border-2 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-copper hover:text-copper" data-filter="datascience">Data Science</button>
-                <button class="filter-btn px-6 py-3 rounded-full font-medium border-2 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-copper hover:text-copper" data-filter="signal-processing">Signal Processing</button>
-                <button class="filter-btn px-6 py-3 rounded-full font-medium border-2 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-copper hover:text-copper" data-filter="community">Community</button>
+                <button class="filter-btn active px-6 py-3 rounded-full font-medium border-2 border-copper text-copper dark:text-copper" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-medium border-2 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-copper hover:text-copper" data-filter="fullstack">
+                    Full-Stack
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-medium border-2 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-copper hover:text-copper" data-filter="datascience">
+                    Data Science
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-medium border-2 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-copper hover:text-copper" data-filter="signal-processing">
+                    Signal Processing
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-medium border-2 border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-copper hover:text-copper" data-filter="community">
+                    Community
+                </button>
             </div>
         </div>
     </section>
 
     <section class="py-16 bg-white dark:bg-dark-bg transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full px-6 lg:px-12">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <div class="project-card bg-white dark:bg-card-dark rounded-xl shadow-lg overflow-hidden scroll-reveal" 
@@ -99,7 +166,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-display font-semibold text-navy dark:text-white mb-3">Energy Hub</h3>
                         <p class="text-gray-600 dark:text-gray-400 mb-4">
-                            Comprehensive energy management platform combining interactive dashboards with deep learning transformers architecture.
+                            Comprehensive energy management platform combining interactive dashboards with deep learning transformers architecture for weather normalization and forecasting.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
@@ -304,14 +371,40 @@
                     <div>
                         <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Project Overview</h3>
                         <p class="text-gray-600 dark:text-gray-400 mb-4">
-                            Energy Hub is a comprehensive energy management platform that combines interactive dashboards with deep learning transformers architecture for weather normalization and 168-hour forecasting across non-residential buildings.
+                            Energy Hub is a comprehensive energy management platform that combines interactive dashboards with deep learning transformers architecture for weather normalization and 168-hour forecasting across non-residential buildings. The platform addresses the critical need for energy optimization as global consumption is projected to reach 225,000 TWh by 2035.
                         </p>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Key Features:</h4>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-1 mb-4">
+                            <li>• Interactive electricity modeling with advanced filters</li>
+                            <li>• Building-by-building energy usage exploration</li>
+                            <li>• Weather normalization using deep learning transformers</li>
+                            <li>• 168-hour energy forecasting models</li>
+                            <li>• Mobile-friendly responsive design</li>
+                        </ul>
                     </div>
                     <div>
                         <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Technical Implementation</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
-                            <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Dash</span>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-navy dark:text-white mb-2">Tech Stack:</h4>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Full-stack</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Dash</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Plotly</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Azure</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Docker</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Transformers</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Data Visualization</span>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Impact:</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            This project demonstrates end-to-end data science capabilities, from data preprocessing and model development to deployment and visualization. The platform supports energy management professionals in making data-driven decisions for optimization and carbon modeling.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/gatechdvateam/energy_hub" target="_blank" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+                                View on GitHub
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -322,13 +415,52 @@
     <div id="modal-data-mining" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
         <div class="modal-content bg-white dark:bg-card-dark rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-card-dark z-10">
-                <h2 class="text-2xl font-display font-bold text-navy dark:text-white">Data Mining</h2>
+                <h2 class="text-2xl font-display font-bold text-navy dark:text-white">Data Mining & Statistical Learning</h2>
                 <button onclick="closeProjectModal('data-mining')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
             <div class="p-6">
-                <p class="text-gray-600 dark:text-gray-400">Comprehensive exploration of data mining techniques and statistical learning methods.</p>
+                <img src="resources/data-mining.jpg" alt="Data Mining Visualization" class="w-full h-64 object-cover rounded-lg mb-6" onerror="this.src='https://images.unsplash.com/photo-1551288049-bb848a55a175?auto=format&fit=crop&q=80'">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Project Overview</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Comprehensive exploration of data mining techniques and statistical learning methods. This repository includes implementations of various algorithms, practical applications, and real-world datasets for hands-on learning experiences in data science and statistical analysis.
+                        </p>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Key Components:</h4>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-1 mb-4">
+                            <li>• Statistical learning algorithms implementation</li>
+                            <li>• Data mining techniques and methodologies</li>
+                            <li>• Real-world dataset analysis</li>
+                            <li>• Practical applications and case studies</li>
+                            <li>• Comparative analysis of different approaches</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Technical Details</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-navy dark:text-white mb-2">Tech Stack:</h4>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">R</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Statistics</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Data Mining</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Data Visualization</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">End-To-End Machine Learning</span>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Applications:</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+Comprehensive exploration of data mining techniques and statistical learning methods. Each report in this repository is an end-to-end machine learning analysis using real-world datasets.                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/shadowfax42/data-mining-and-statistical-learning" target="_blank" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -336,13 +468,53 @@
     <div id="modal-mushroom-prediction" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
         <div class="modal-content bg-white dark:bg-card-dark rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-card-dark z-10">
-                <h2 class="text-2xl font-display font-bold text-navy dark:text-white">Mushroom Edibility</h2>
+                <h2 class="text-2xl font-display font-bold text-navy dark:text-white">Mushroom Edibility Prediction</h2>
                 <button onclick="closeProjectModal('mushroom-prediction')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
             <div class="p-6">
-                <p class="text-gray-600 dark:text-gray-400">Machine learning project for predicting mushroom edibility.</p>
+                <img src="resources/mushroom-prediction.jpg" alt="Mushroom Classification" class="w-full h-64 object-cover rounded-lg mb-6" onerror="this.src='https://images.unsplash.com/photo-1598512752271-33f913a5af13?auto=format&fit=crop&q=80'">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Project Overview</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Machine learning project for predicting mushroom edibility using various classification algorithms. Features comprehensive data analysis, feature engineering, and model comparison for accurate prediction of edible vs. poisonous mushrooms based on physical characteristics.
+                        </p>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Key Features:</h4>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-1 mb-4">
+                            <li>• Multiple classification algorithms comparison</li>
+                            <li>• Comprehensive feature engineering</li>
+                            <li>• Model performance evaluation</li>
+                            <li>• Data visualization and analysis</li>
+                            <li>• Production-ready prediction pipeline</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Technical Implementation</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-navy dark:text-white mb-2">Algorithms Used:</h4>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Scikit-learn</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Classification</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Exploratory Data Analysis</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Feature Engineering</span>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Impact:</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            This project demonstrates practical application of machine learning for public safety, showcasing end-to-end data science workflow from data exploration to model deployment, with potential real-world applications in food safety and mycology.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/shadowfax42/mushroom-edibility-prediction" target="_blank" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -350,41 +522,158 @@
     <div id="modal-solar-coders" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
         <div class="modal-content bg-white dark:bg-card-dark rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-card-dark z-10">
-                <h2 class="text-2xl font-display font-bold text-navy dark:text-white">MIT Policy Hackathon</h2>
+                <h2 class="text-2xl font-display font-bold text-navy dark:text-white">MIT Policy Hackathon 2025</h2>
                 <button onclick="closeProjectModal('solar-coders')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
             <div class="p-6">
-                <p class="text-gray-600 dark:text-gray-400">SolarCoders submission developing innovative policy solutions.</p>
+                <img src="resources/solar-coders.jpg" alt="MIT Policy Hackathon" class="w-full h-64 object-cover rounded-lg mb-6" onerror="this.src='https://images.unsplash.com/photo-1509391366360-fe5bb58583bb?auto=format&fit=crop&q=80'">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Project Overview</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+This project addresses the 'Rider E' charge in Bowling Green, Ohio, a policy that currently penalizes residential solar adopters and limits the viability of Distributed Energy Resources (DERs). In response, we propose a Fair Energy Pricing Framework. This model balances the utility's need for cost recovery with fair compensation for the grid services provided by solar-plus-battery systems, specifically regarding grid stability and peak shaving.                        </p>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Key Innovations:</h4>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-1 mb-4">
+                            <li>• Data-driven solar deployment optimization</li>
+                            <li>• Policy impact modeling and analysis</li>
+                            <li>• Stakeholder engagement strategies</li>
+                            <li>• Economic feasibility assessments</li>
+                            <li>• Environmental impact projections</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Technical Approach</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-navy dark:text-white mb-2">Technologies Used:</h4>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Jupyter Notebook</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Policy Analysis and Research</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Data Visualization</span>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Recognition:</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+Awarded a Certificate of Participation at the MIT Policy Hackathon, where our team demonstrated the intersection of data science, policy analysis, and environmental sustainability through an innovative renewable energy framework                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/shadowfax42/SolarCoders-MITPolicyHackathon25" target="_blank" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="modal-python-party" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
-        <div class="modal-content bg-white dark:bg-card-dark rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-card-dark z-10">
-                <h2 class="text-2xl font-display font-bold text-navy dark:text-white">Python Summer Party</h2>
-                <button onclick="closeProjectModal('python-party')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div class="p-6">
-                <p class="text-gray-600 dark:text-gray-400">An intensive 15-day coding challenge.</p>
-            </div>
-        </div>
-    </div>
 
     <div id="modal-mesa-study" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
         <div class="modal-content bg-white dark:bg-card-dark rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-card-dark z-10">
                 <h2 class="text-2xl font-display font-bold text-navy dark:text-white">MESA Impact Study</h2>
                 <button onclick="closeProjectModal('mesa-study')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
             <div class="p-6">
-                <p class="text-gray-600 dark:text-gray-400">Educational research analyzing MESA program impact.</p>
+                <img src="resources/mesa-study.jpg" alt="MESA Impact Study" class="w-full h-64 object-cover rounded-lg mb-6" onerror="this.src='https://images.unsplash.com/photo-1427504746383-796ada2af88e?auto=format&fit=crop&q=80'">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Research Overview</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Intensive summer research program conducted at <strong>Utah State University (Logan, UT)</strong>. The study analyzed the impact of MESA (Mathematics, Engineering, Science Achievement) programs on 435 high school students across four states, utilizing statistical modeling to evaluate STEM engagement.
+                        </p>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Research Objectives:</h4>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-1 mb-4">
+                            <li>• Evaluate MESA program impact on self-efficacy</li>
+                            <li>• Assess perception of engineering careers</li>
+                            <li>• Measure STEM interest development</li>
+                            <li>• Analyze student outcome relationships</li>
+                            <li>• Synthesize findings into academic manuscripts</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Methodology & Outcomes</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-navy dark:text-white mb-2">Analysis Methods:</h4>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">SPSS</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Statistical Analysis</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Academic Writing</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">STEM Education</span>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Significance:</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            This NSF-supported research contributed to the understanding of effective STEM intervention strategies. The summer fellowship culminated in the production of <strong>two research papers</strong> detailing the correlation between program participation and student educational outcomes.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/shadowfax42/mesa-impact-study" target="_blank" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modal-python-party" class="fixed inset-0 bg-black bg-opacity-50 modal hidden z-50 flex items-center justify-center p-4">
+        <div class="modal-content bg-white dark:bg-card-dark rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-card-dark z-10">
+                <h2 class="text-2xl font-display font-bold text-navy dark:text-white">Python Summer Party 2025</h2>
+                <button onclick="closeProjectModal('python-party')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <img src="resources/python-party.jpg" alt="Python Coding Challenge" class="w-full h-64 object-cover rounded-lg mb-6" onerror="this.src='https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80'">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Challenge Overview</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            An intensive 15-day coding challenge designed to sharpen Python skills through consistent practice. Participants tackled daily algorithmic problems and data science tasks to build discipline and problem-solving capabilities.
+                        </p>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Key Highlights:</h4>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-1 mb-4">
+                            <li>• 15-day continuous coding streak</li>
+                            <li>• Daily algorithmic challenges</li>
+                            <li>• Structured problem solving</li>
+                            <li>• Code optimization & review</li>
+                            <li>• Earned Certificate of Completion</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Skills & Impact</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-navy dark:text-white mb-2">Focus Areas:</h4>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Algorithms</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Data Structures</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Certification</span>
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-navy dark:text-white mb-2">Achievements:</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Successfully completed all 15 days of the curriculum, demonstrating technical consistency and growth. Awarded a Certificate of Completion for mastering the core concepts presented in the challenge series.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/shadowfax42/python-summer-party-2025" target="_blank" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -394,11 +683,37 @@
             <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-card-dark z-10">
                 <h2 class="text-2xl font-display font-bold text-navy dark:text-white">LPC Speech Codec</h2>
                 <button onclick="closeProjectModal('lpc-codec')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
             <div class="p-6">
-                <p class="text-gray-600 dark:text-gray-400">Speech codec implementation using Linear Predictive Coding.</p>
+                <img src="resources/lpc-project.jpg" alt="LPC Speech Codec" class="w-full h-64 object-cover rounded-lg mb-6" onerror="this.src='https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80'">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Project Overview</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Speech codec implementation using Linear Predictive Coding for audio compression and synthesis. Features LPC analysis, pitch detection, and speech reconstruction.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-navy dark:text-white mb-3">Technical Implementation</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-navy dark:text-white mb-2">Tech Stack:</h4>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">MATLAB</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">Digital Signal</span>
+                                <span class="bg-sage bg-opacity-20 text-sage px-3 py-1 rounded-full text-sm">LPC</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/shadowfax42/lpc-encoder-decoder" target="_blank" class="bg-copper text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
