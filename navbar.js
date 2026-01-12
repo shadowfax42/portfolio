@@ -1,12 +1,10 @@
-// navbar.js
-
 const navbarHTML = `
 <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
     <div class="w-full px-6 lg:px-12">
         <div class="flex justify-between items-center h-20">
             
             <div class="flex-shrink-0">
-                <a href="index.html" class="text-3xl font-display font-bold text-navy dark:text-white tracking-tight hover:text-copper dark:hover:text-copper transition-colors">SE</a>
+                <a href="index.html" class="text-3xl font-display font-bold text-navy dark:text-white tracking-tight hover:text-copper dark:hover:text-copper transition-colors">Siham Elmali</a>
             </div>
 
             <div class="hidden md:block">
